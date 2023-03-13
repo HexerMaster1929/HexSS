@@ -10,14 +10,14 @@ Ver = "3.0A"
 UI =  game:GetObjects("rbxassetid://12773071270")[1]
 local Assets = UI.Assets
 local Base = UI.Base
-local TestingModules = UI.TestingModules
+--[[local TestingModules = UI.TestingModules
 local TabsManager = require(TestingModules.TabsManager)
 local ExecutorManager = require(TestingModules.ExecutorManager)
 local BackdoorModule = require(TestingModules.BackdoorManager)
 local ListManager = require(TestingModules.ListManager)
 local TextTipManager = require(TestingModules.TextTipManager)
 local MessageBox = require(TestingModules.MessageBoxManager)
-local EditorFunctions = require(TestingModules.HexSSEditorFunctions)
+local EditorFunctions = require(TestingModules.HexSSEditorFunctions)]]
 
 local ExecutorFrame = Base.Body.Pages.Executor
 local AboutFrame = Base.Body.Pages.About
