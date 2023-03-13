@@ -2,12 +2,12 @@
 
 Update1 = "Complete backdoor/Executor redesign"
 Update2 = "New UI And Script Hub"
-Update3 = "Temp Removed Custom Scripts Due To Multiple Bugs"
+Update3 = "Redid Script Execution System"
 Ver = "3.0A"
 
 -- Locals
 
-local UI = script.Parent
+UI =  game:GetObjects("rbxassetid://12773071270")[1]
 local Assets = UI.Assets
 local Base = UI.Base
 local TestingModules = UI.TestingModules
