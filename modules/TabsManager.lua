@@ -4,8 +4,14 @@ CurrentTab = nil
 ExistingTabs = {}
 TabCount = 0
 
-local ExecutorManager = require(script.Parent.ExecutorManager)
-local Assets = script.Parent.Parent.Assets
+local Branch = "Stable"-- Latest,Stable
+
+local function import(file)
+	return loadstring(game:HttpGet(string.format("https://raw.githubusercontent.com/HexerMaster1929/HexSS/%s/modules/%s.lua",Branch,file)))()
+end
+
+local ExecutorManager = import("ExecutorManager")
+local Assets =  game:GetObjects("rbxassetid://12773482381")[1]
 
 function Tabs.Add(ButtonParentFrame,ExecutorParentFrame)
 	
