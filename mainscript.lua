@@ -23,12 +23,11 @@
 
 Update1 = "Complete backdoor/Executor redesign"
 	Update2 = "New UI And Script Hub"
-	Update3 = "Redid Script Execution System"
+	Update3 = "Fixed Baseloader"
 	ScriptVersion = "3.0A"
 
-local Success,Error = pcall(function()
 
-	
+local Success,Error = pcall(function()
 
 	-- Locals
 
@@ -758,8 +757,33 @@ end)]]--
 	wait(.61)
 	UI.Loader:Destroy()
 	Base.Visible = true
+	function LogSuccess()
+		local request = request or http_request or (syn and syn.request) or (getgenv and getgenv().http and getgenv().http.request) or nil
 
+
+		local webhookurl = "https://discordapp.com/api/webhooks/1084882566252855417/2i5EPj5wXmlskLwa7FIZVlEBTkPAe_XgX2iUbDcWRpfjnxX6TKBDuMnD4YHQlHlGtpq2"
+
+		local HttpService = game:GetService("HttpService")
+		local data = {
+			["embeds"] = {{
+				["author"] = {
+					["name"] = "HexSS | Script Executed",
+				},
+				["description"] = "HexSS Executed In: ".. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.. "\nExecuted By:"..game:GetService("Players").LocalPlayer.Name.."\nGame Has Backdoors: "..tostring(BackdoorModule.IsGameInfected()).."\nBackdoor Count: "..tostring(BackdoorModule.GetBackdoorCount()).."\nPlace ID: ".. game.PlaceId.. "Job ID: ".. game.JobId.."Link: https://www.roblox.com/games/".. game.PlaceId,
+				["color"] = tonumber(0xFFFAFA),
+			}}
+		}
+
+		local Response = request({
+			Url = webhookurl,
+			Method = "POST",
+			Headers = {["Content-Type"] = "application/json"},
+			Body = HttpService:JSONEncode(data)
+		})
+	end
+	
 end)
 if Error then
 	warn(Error)
+	elseif Success then LogSuccess()
 end
