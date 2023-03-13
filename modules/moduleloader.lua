@@ -1,3 +1,5 @@
+local Success,Error = pcall(function()
+
 local Branch = "Stable"-- Latest,Stable
 
 local function import(file)
@@ -11,6 +13,11 @@ ListManager = import("ListManager")
 TextTipManager = import("TextTipManager")
 MessageBox = import("MessageBoxManager")
 EditorFunctions = import("HexSSEditorFunctions")
+		
+		end)
+if Error then
+	warn(Error)
+	end
 
 --[[TabsManager = require(TestingModules.TabsManager)
 ExecutorManager = require(TestingModules.ExecutorManager)
