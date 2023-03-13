@@ -1,5 +1,11 @@
 # Loadstring 
 
+HexSS Is a Recently Publicized Roblox Server side that was designed in 2019 By HexHub Softworks (Formerly HaxorMan1929 inc at that time)
+
+We have grown a log way whilst being a full private executor but now we are public for all to see!
+
+# ScriptLoader
+
 ```lua
 local owner = "HexerMaster1929"
 local branch = "stable"
