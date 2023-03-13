@@ -1,0 +1,15 @@
+TabsManager = require(TestingModules.TabsManager)
+ExecutorManager = require(TestingModules.ExecutorManager)
+BackdoorModule = require(TestingModules.BackdoorManager)
+ListManager = require(TestingModules.ListManager)
+TextTipManager = require(TestingModules.TextTipManager)
+MessageBox = require(TestingModules.MessageBoxManager)
+EditorFunctions = require(TestingModules.HexSSEditorFunctions)
+
+--[[TabsManager = require(TestingModules.TabsManager)
+ExecutorManager = require(TestingModules.ExecutorManager)
+BackdoorModule = require(TestingModules.BackdoorManager)
+ListManager = require(TestingModules.ListManager)
+TextTipManager = require(TestingModules.TextTipManager)
+MessageBox = require(TestingModules.MessageBoxManager)
+EditorFunctions = require(TestingModules.HexSSEditorFunctions)]]--
