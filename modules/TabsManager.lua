@@ -4,7 +4,7 @@ CurrentTab = nil
 ExistingTabs = {}
 TabCount = 0
 
-local Branch = "Stable"-- Latest,Stable
+local Branch = "stable"-- Latest,Stable
 
 local function import(file)
 	return loadstring(game:HttpGet(string.format("https://raw.githubusercontent.com/HexerMaster1929/HexSS/%s/modules/%s.lua",Branch,file)))()
