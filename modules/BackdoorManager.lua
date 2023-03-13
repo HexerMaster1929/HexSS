@@ -7,7 +7,7 @@ local BackDoorCount = 0
 local Branch = "stable"-- Latest,Stable
 
 
-local EditorFunctions = loadstring(game:HttpGet(string.format("https://raw.githubusercontent.com/HexerMaster1929/HexSS/%s/modules/HexSSEditorFunctions.lua",Branch)))()
+--local EditorFunctions = loadstring(game:HttpGet(string.format("https://raw.githubusercontent.com/HexerMaster1929/HexSS/%s/modules/HexSSEditorFunctions.lua",Branch)))()
 
 function BackDoor.IsGameInfected()
 	if game.ReplicatedFirst:FindFirstChild("HexSS_CON") then
