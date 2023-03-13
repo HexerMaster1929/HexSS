@@ -9,9 +9,9 @@ local function webImport(file)
     return loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/%s/%s/%s/%s.lua"):format(owner, Repo, branch, file)), file .. '.lua')()
 end
 
---webImport("modules/moduleloader")
---webImport("init")
---webImport("ui/init")
 
-webImport("mainscript")
+webImport("init")
+webImport("modules/moduleloader")
+webImport("ui/init")
+
 ```
