@@ -8,6 +8,7 @@ local function webImport(file)
     return loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/%s/Hydroxide/%s/%s.lua"):format(owner, branch, file)), file .. '.lua')()
 end
 
+webImport("modules/moduleloader")
 webImport("init")
 webImport("ui/init")
 ```
