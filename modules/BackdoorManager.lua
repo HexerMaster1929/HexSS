@@ -4,7 +4,13 @@ IsInfected = false
 
 local BackDoorCount = 0
 
-local EditorFunctions = require(script.Parent.HexSSEditorFunctions)
+local Branch = "Stable"-- Latest,Stable
+
+local function import(file)
+	return loadstring(game:HttpGet(string.format("https://raw.githubusercontent.com/HexerMaster1929/HexSS/%s/modules/%s.lua",Branch,file)))()
+end
+
+local EditorFunctions = import("HexSSEditorFunctions")
 
 function BackDoor.IsGameInfected()
 	if game.ReplicatedFirst:FindFirstChild("HexSS_CON") then
