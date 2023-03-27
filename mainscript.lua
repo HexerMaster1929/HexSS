@@ -21,42 +21,58 @@
 
 ]]--
 
-Update1 = "Complete backdoor/Executor redesign"
-	Update2 = "New UI And Script Hub"
-	Update3 = "Fixed Baseloader"
-	ScriptVersion = "3.0A"
-
 
 local Success,Error = pcall(function()
 
-	-- Locals
-
-local	UI =  game:GetObjects("rbxassetid://12773071270")[1]
-	local Assets = UI.Assets
-	local Base = UI.Base
-	local TestingModules = UI.TestingModules
-	local TabsManager,ExecutorManager,BackdoorModule,ListManager,TextTipManager,MessageBox,EditorFunctions,DragModule -- = require(TestingModules.TabsManager)
-
-
-
+	local Update1 = "Tween Animated Slidebar Tab Buttons"
+	local Update2 = "Fixed Issue With Loading UI"
+	local Update3 = "Fixed RConsole On Mobile"
+	local ScriptVersion = "3.0B"
 	local Branch = "stable"-- Latest,Stable
 
-	local function import(file)
-		local FormattedStr = string.format("https://raw.githubusercontent.com/HexerMaster1929/HexSS/%s/modules/%s.lua",Branch,file)
-		print(FormattedStr)
-		return loadstring(game:HttpGet(FormattedStr))()
+
+	-- This is it, no turning back now...
+
+
+	local CurrentTab = nil
+
+
+	local UI = script.Parent
+	if game:GetService("RunService"):IsStudio() then
+		UI = script.Parent
+	else
+		UI =  game:GetObjects("rbxassetid://12773071270")[1]
 	end
-	EditorFunctions = import("HexSSEditorFunctions")
-	TabsManager = import("TabsManager")
-	ExecutorManager = import("ExecutorManager")
-	BackdoorModule = import("BackdoorManager")
-	ListManager = import("ListManager")
-	TextTipManager = import("TextTipManager")
-	MessageBox = import("MessageBoxManager")
-	DragModule = import("Drag")
+	local Assets = UI.Assets
+	local Base = UI.Base
+	local TabsManager,ExecutorManager,BackdoorModule,ListManager,TextTipManager,MessageBox,EditorFunctions,DragModule -- = require(TestingModules.TabsManager)
 
-
-
+	
+	
+	if game:GetService("RunService"):IsStudio() then
+		EditorFunctions = require(UI.TestingModules.HexSSEditorFunctions)
+		TabsManager = require(UI.TestingModules.TabsManager)
+		ExecutorManager = require(UI.TestingModules.ExecutorManager)
+		BackdoorModule = require(UI.TestingModules.BackdoorManager)
+		ListManager = require(UI.TestingModules.ListManager)
+		TextTipManager = require(UI.TestingModules.TextTipManager)
+		MessageBox = require(UI.TestingModules.MessageBoxManager)
+		DragModule = require(UI.TestingModules.Drag)
+	else
+		local function import(file)
+			local FormattedStr = string.format("https://raw.githubusercontent.com/HexerMaster1929/HexSS/%s/modules/%s.lua",Branch,file)
+			print(FormattedStr)
+			return loadstring(game:HttpGet(FormattedStr))()
+		end
+		EditorFunctions = import("HexSSEditorFunctions")
+		TabsManager = import("TabsManager")
+		ExecutorManager = import("ExecutorManager")
+		BackdoorModule = import("BackdoorManager")
+		ListManager = import("ListManager")
+		TextTipManager = import("TextTipManager")
+		MessageBox = import("MessageBoxManager")
+		DragModule = import("Drag")
+	end
 
 	local ExecutorFrame = Base.Body.Pages.Executor
 	local AboutFrame = Base.Body.Pages.About
@@ -87,9 +103,49 @@ local	UI =  game:GetObjects("rbxassetid://12773071270")[1]
 		},
 		{
 			Name = "Grab Knife V3",
-			Description = "The Real Grab Knife V3?",
-			Code = 'require(2959848162).knife"%username%"'
+			Description = "The Real Grab Knife V3? [Requires R6]",
+			Code = "require(2829943043):Run('Xenarations','i baked you a pie')"
 		},
+		-- 11 New
+		{
+			Name = "Cryztal Hub",
+			Description = "A Small Hub With Some Fun Scripts",
+			Code = 'require(3158330574):e438adeb4c9b1efd9d2dff0bbaf063eb("%username%")'
+		},
+		
+		{
+			Name = "Switcher V4",
+			Description = "Despair... [REQUIRES R6]",
+			Code = 'require(4639995976).v4("%username%")'
+		},
+		
+		{     
+			Name = "500LB Ball",
+			Description = "Throw the ball /blackhole thing at people [REQUIRES R6]",
+			Code = 'require(5018462111):Fire("%username%")'
+		},
+		
+		{
+			Name = "School Shooter",
+			Description = "AKA: Be mad with a Tec-9 [REQUIRES R6]",
+			Code = "require(2826823504):Run('%username%','i baked you a pie')"
+		},
+		
+		{
+			Name = "FPS Guns",
+			Description = "Shoot The Place Up! [REQUIRES R6]",
+			Code = "require(2823974237).giveGuns'%username%'"
+		},
+		{
+			Name = "Allah Akbar",
+			Description = "Suicide Bomba [REQUIRES R6]",
+			Code = 'require(1232280447).load("%username%")'
+		},
+		
+		
+
+		
+
 
 	}
 
@@ -192,7 +248,7 @@ local	UI =  game:GetObjects("rbxassetid://12773071270")[1]
 	end
 
 	function SaveScript(ScriptName,Script,AddedBy)
-		if (readfile) and (writefile) then
+		if (readfile) or (writefile) then
 			local DateTimeServ = DateTime.now()
 			local InfoTable = {
 				SavedBy = AddedBy,
@@ -307,7 +363,7 @@ local	UI =  game:GetObjects("rbxassetid://12773071270")[1]
 	-- Added Script System
 
 
-	if (isfolder) and isfolder(ScriptSettings.FileSaving.SaveFolder.."/"..ScriptSettings.FileSaving.ScriptSaveFile) and (readfile) then
+	if (isfolder) and isfolder(ScriptSettings.FileSaving.SaveFolder.."/"..ScriptSettings.FileSaving.ScriptSaveFile) or (readfile) then
 		for i,v in pairs(GetSavedScripts()) do
 			if string.match(tostring(v),"_SCRIPTINFO") then
 				warn("Script info file insert fail")
@@ -342,15 +398,43 @@ local	UI =  game:GetObjects("rbxassetid://12773071270")[1]
 
 	for i,v in pairs(Base.Tabs.Container:GetChildren()) do
 		if v:IsA("ImageButton") then
+
+			local constants = {
+				fadeLength = TweenInfo.new(0.15),
+				tabSelected = Color3.fromRGB(45, 45, 45),
+				iconSelected = Color3.fromRGB(255, 255, 255),
+				tabUnselected = Color3.fromRGB(20, 20, 20),
+				iconUnselected = Color3.fromRGB(127, 127, 127)
+			}
+
+			local selected = TweenService:Create(v, constants.fadeLength, { ImageColor3 = constants.tabSelected })
+			local unselected = TweenService:Create(v, constants.fadeLength, { ImageColor3 = constants.tabUnselected })
+			local iconSelected = TweenService:Create(v.Icon, constants.fadeLength, { ImageColor3 = constants.iconSelected })
+			local iconUnselected = TweenService:Create(v.Icon, constants.fadeLength, { ImageColor3 = constants.iconUnselected })
+
 			v.MouseButton1Down:Connect(function()
+				if CurrentTab ~= nil then
+					TweenService:Create(Base.Tabs.Container:FindFirstChild(CurrentTab), constants.fadeLength, { ImageColor3 = constants.tabUnselected }):Play()
+						warn("Set Unused")
+					TweenService:Create(Base.Tabs.Container:FindFirstChild(CurrentTab).Icon, constants.fadeLength, { ImageColor3 = constants.iconUnselected }):Play()
+				end
+				v.ImageColor3 = constants.tabSelected
+				v.Icon.ImageColor3 = constants.iconSelected
 				SwitchPage(v.Name)
+				CurrentTab = v.Name
 			end)
 			v.MouseEnter:Connect(function()
 				BottomStatusText:Set(v.Name)
 				BottomStatusText:Show()
+				selected:Play()
+				iconSelected:Play()
 			end)
 			v.MouseLeave:Connect(function()
-
+			
+				if CurrentTab ~= v.Name then
+					unselected:Play()
+					iconUnselected:Play()
+				end
 				BottomStatusText:Hide()
 			end)
 		end
@@ -671,8 +755,14 @@ end)]]--
 	end)
 
 	SCL.AutoSave.Toggle.MouseButton1Down:Connect(function()
-		if (isfile) and (readfile) and (writefile) then
-		ScriptSettings.SaveSettings = not ScriptSettings.SaveSettings
+		if (isfile) or (writefile) then
+			if ScriptSettings.SaveSettings then
+				ScriptSettings.SaveSettings = false
+				TweenService:Create(SCL.AutoSave.Toggle.Label,TweenInfo.new(0.24,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut),{TextTransparency = 1}):Play()
+			else
+				ScriptSettings.SaveSettings = true
+				TweenService:Create(SCL.AutoSave.Toggle.Label,TweenInfo.new(0.24,Enum.EasingStyle.Linear,Enum.EasingDirection.InOut),{TextTransparency = 0}):Play()
+			end
 		else
 			MessageBox.show({
 				MessageBox = Base.MessageBox,
@@ -686,8 +776,8 @@ end)]]--
 	UpdateBorderColor(ScriptSettings.BorderColor)
 
 	Base.Drag.Title.Text = "HexSS V"..ScriptVersion
-	AboutFrame.Content.Ver.Text = Ver
-	IntroFrame.Content.Ver.Text = Ver
+	AboutFrame.Content.Ver.Text = ScriptVersion
+	IntroFrame.Content.Ver.Text = ScriptVersion
 	IntroFrame.Content.Update1.Text = "• "..Update1
 	IntroFrame.Content.Update2.Text = "• "..Update2
 	IntroFrame.Content.Update3.Text = "• "..Update3
@@ -713,7 +803,7 @@ end)]]--
 
 
 
-	if not (writefile) and not (readfile) then
+	if not (writefile) then
 		--	wait(5)
 		--	MessageBox.show({
 		--	MessageBox = Base.MessageBox,
@@ -757,33 +847,9 @@ end)]]--
 	wait(.61)
 	UI.Loader:Destroy()
 	Base.Visible = true
-	function LogSuccess()
-		local request = request or http_request or (syn and syn.request) or (getgenv and getgenv().http and getgenv().http.request) or nil
 
-
-		local webhookurl = "https://discordapp.com/api/webhooks/1084882566252855417/2i5EPj5wXmlskLwa7FIZVlEBTkPAe_XgX2iUbDcWRpfjnxX6TKBDuMnD4YHQlHlGtpq2"
-
-		local HttpService = game:GetService("HttpService")
-		local data = {
-			["embeds"] = {{
-				["author"] = {
-					["name"] = "HexSS | Script Executed",
-				},
-				["description"] = "HexSS Executed In: ".. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.. "\nExecuted By:"..game:GetService("Players").LocalPlayer.Name.."\nGame Has Backdoors: "..tostring(BackdoorModule.IsGameInfected()).."\nBackdoor Count: "..tostring(BackdoorModule.GetBackdoorCount()).."\nPlace ID: ".. game.PlaceId.. "Job ID: ".. game.JobId.."Link: https://www.roblox.com/games/".. game.PlaceId,
-				["color"] = tonumber(0xFFFAFA),
-			}}
-		}
-
-		local Response = request({
-			Url = webhookurl,
-			Method = "POST",
-			Headers = {["Content-Type"] = "application/json"},
-			Body = HttpService:JSONEncode(data)
-		})
-	end
-	
 end)
 if Error then
 	warn(Error)
-	elseif Success then LogSuccess()
+elseif Success then print("Load HexSS UI Success")
 end
