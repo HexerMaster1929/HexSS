@@ -21,13 +21,18 @@
 
 ]]--
 
+if _G.AlreadyLoaded then 
+    warn("ALREADY LOADED")
+    return 
+    end
+
 
 local Success,Error = pcall(function()
 
-	local Update1 = "Tween Animated Slidebar Tab Buttons"
-	local Update2 = "Fixed Issue With Loading UI"
-	local Update3 = "Fixed RConsole On Mobile"
-	local ScriptVersion = "3.0B"
+	local Update1 = "Fixed UI Not Loading"
+	local Update2 = "Fixed Missing UI Icons"
+	local Update3 = "Added Character Refresh Button In Executor Tab"
+	local ScriptVersion = "3.0C"
 	local Branch = "stable"-- Latest,Stable
 
 
@@ -343,6 +348,10 @@ local Success,Error = pcall(function()
 
 	Buttons.R6.MouseButton1Down:Connect(function()
 		Execute('require(6697419109):r6("%username%")')
+	end)
+	
+	Buttons.RE.MouseButton1Down:Connect(function()
+		Execute('game.Players:FindFirstChild("%username%"):LoadCharacter()')
 	end)
 
 	Buttons.R15.MouseButton1Down:Connect(function()
@@ -863,4 +872,5 @@ end)
 if Error then
 	warn(Error)
 elseif Success then print("Load HexSS UI Success")
+    _G.AlreadyLoaded = true
 end
