@@ -288,8 +288,8 @@ local Success,Error = pcall(function()
 	function GetSavedScripts()
 		local SavedScripts;
 		if (listfiles) then
-			SavedScripts = listfiles(ScriptSettings.FileSaving.ScriptSaveFile)
-
+			--SavedScripts = listfiles(ScriptSettings.FileSaving.ScriptSaveFile)
+warn("TEMP PATCHED")
 		else
 			warn("Executor does not have list file")
 		end
