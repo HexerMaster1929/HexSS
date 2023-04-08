@@ -47,8 +47,8 @@ local Success,Error = pcall(function()
 	local Base = UI.Base
 	local TabsManager,ExecutorManager,BackdoorModule,ListManager,TextTipManager,MessageBox,EditorFunctions,DragModule -- = require(TestingModules.TabsManager)
 
-	
-	
+
+
 	if game:GetService("RunService"):IsStudio() then
 		EditorFunctions = require(UI.TestingModules.HexSSEditorFunctions)
 		TabsManager = require(UI.TestingModules.TabsManager)
@@ -112,25 +112,25 @@ local Success,Error = pcall(function()
 			Description = "A Small Hub With Some Fun Scripts",
 			Code = 'require(3158330574):e438adeb4c9b1efd9d2dff0bbaf063eb("%username%")'
 		},
-		
+
 		{
 			Name = "Switcher V4",
 			Description = "Despair... [REQUIRES R6]",
 			Code = 'require(4639995976).v4("%username%")'
 		},
-		
+
 		{     
 			Name = "500LB Ball",
 			Description = "Throw the ball /blackhole thing at people [REQUIRES R6]",
 			Code = 'require(5018462111):Fire("%username%")'
 		},
-		
+
 		{
 			Name = "School Shooter",
 			Description = "AKA: Be mad with a Tec-9 [REQUIRES R6]",
 			Code = "require(2826823504):Run('%username%','i baked you a pie')"
 		},
-		
+
 		{
 			Name = "FPS Guns",
 			Description = "Shoot The Place Up! [REQUIRES R6]",
@@ -141,10 +141,10 @@ local Success,Error = pcall(function()
 			Description = "Suicide Bomba [REQUIRES R6]",
 			Code = 'require(1232280447).load("%username%")'
 		},
-		
-		
 
-		
+
+
+
 
 
 	}
@@ -288,8 +288,16 @@ local Success,Error = pcall(function()
 	function GetSavedScripts()
 		local SavedScripts;
 		if (listfiles) then
-			--SavedScripts = listfiles(ScriptSettings.FileSaving.ScriptSaveFile)
-warn("TEMP PATCHED")
+			if isfolder(ScriptSettings.FileSaving.SaveFolder.."/"..ScriptSettings.FileSaving.ScriptSaveFile) then
+
+				SavedScripts = listfiles(ScriptSettings.FileSaving.SaveFolder.."/"..ScriptSettings.FileSaving.ScriptSaveFile)
+			else
+
+				warn("No Saved Scripts!")
+				return false
+
+			end
+
 		else
 			warn("Executor does not have list file")
 		end
@@ -364,6 +372,7 @@ warn("TEMP PATCHED")
 
 
 	if (isfolder) and isfolder(ScriptSettings.FileSaving.SaveFolder.."/"..ScriptSettings.FileSaving.ScriptSaveFile) or (readfile) then
+		if GetSavedScripts() ~= false then 
 		for i,v in pairs(GetSavedScripts()) do
 			if string.match(tostring(v),"_SCRIPTINFO") then
 				warn("Script info file insert fail")
@@ -388,11 +397,12 @@ warn("TEMP PATCHED")
 		end
 
 
-		AddedScriptFrame.List.Query.Search:GetPropertyChangedSignal("Text"):Connect(function()
-			ListManager.FilterList(AddedScriptFrame.List.Results.Clip.Content,AddedScriptFrame.List.Query.Search.Text)
-		end)
-
+		
+end
 	end
+	AddedScriptFrame.List.Query.Search:GetPropertyChangedSignal("Text"):Connect(function()
+		ListManager.FilterList(AddedScriptFrame.List.Results.Clip.Content,AddedScriptFrame.List.Query.Search.Text)
+	end)
 
 	-- Page System
 
@@ -415,7 +425,7 @@ warn("TEMP PATCHED")
 			v.MouseButton1Down:Connect(function()
 				if CurrentTab ~= nil then
 					TweenService:Create(Base.Tabs.Container:FindFirstChild(CurrentTab), constants.fadeLength, { ImageColor3 = constants.tabUnselected }):Play()
-						warn("Set Unused")
+					warn("Set Unused")
 					TweenService:Create(Base.Tabs.Container:FindFirstChild(CurrentTab).Icon, constants.fadeLength, { ImageColor3 = constants.iconUnselected }):Play()
 				end
 				v.ImageColor3 = constants.tabSelected
@@ -430,7 +440,7 @@ warn("TEMP PATCHED")
 				iconSelected:Play()
 			end)
 			v.MouseLeave:Connect(function()
-			
+
 				if CurrentTab ~= v.Name then
 					unselected:Play()
 					iconUnselected:Play()
@@ -830,6 +840,7 @@ end)]]--
 	else
 		UI.Parent = game.Players.LocalPlayer.PlayerGui
 	end
+	warn(UI.Parent)
 
 	UI.Loader.Title.Text = "Loading Executor Module"
 	wait(.2)
@@ -847,7 +858,7 @@ end)]]--
 	wait(.61)
 	UI.Loader:Destroy()
 	Base.Visible = true
-
+	warn("LOAD SUCCESS")
 end)
 if Error then
 	warn(Error)
